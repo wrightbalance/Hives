@@ -19,7 +19,7 @@
 			thtml.push("</div>");
 			
 			thtml.push("<div class=\"tpane post tactive\">");
-			thtml.push("	<form method=\"post\" action=\"\" class=\"timeline_frm\">");
+			thtml.push("	<form method=\"post\" action=\"/timeline/post\" class=\"timeline_frm\">");
 			thtml.push("	<input type=\"hidden\" name=\"type\" value=\"status\"/>");
 			thtml.push("		<div id=\"load_form\">");
 			
@@ -48,6 +48,7 @@
 	,'tform': function(type)
 		{
 			thtml = [];
+			$('input[name=type]').val(type);
 			
 			if(type == "video" || type == "photo")
 			{
@@ -56,7 +57,9 @@
 				thtml.push("<div class=\"text\">");
 				thtml.push("<div class=\"share_gray_content\">");
 				thtml.push("	<h4 class=\"t_h4\">Share "+title+" to your friends</h4>");
-				thtml.push("	<button type=\"button\" class=\"btnblue\">Browser Photo</button>");
+				thtml.push("	<input type=\"file\" name=\"file\" id=\"share_photo\" style=\"display: none\"/>");
+				thtml.push("	<input type=\"text\" name=\"filename\" style=\"display: none\"/>");
+				thtml.push("	<div id=\"share_queue\"></div>");
 				thtml.push("	<span class=\"t_info\">");
 				thtml.push("		<p>Select  "+title+" file on your computer.</p>");
 				thtml.push("		<p>Refrain from sharing porn or offensive video.</p>");
@@ -73,5 +76,67 @@
 			}	
 			
 			$('#load_form').empty().prepend(thtml.join(""));
+			
+			
+			
 		}
+	,'timelineviewer' : function()
+	{
+		var thtml = [];
+		
+		thtml.push("<div class=\"nano\">");
+		thtml.push("<div class=\"content\">");
+		thtml.push("	<div class=\"pviewer\">");
+		thtml.push("	<h3 class=\"t_caption\">&nbsp;</h3>");
+		thtml.push("	<div class=\"v_content\"></div>");
+		thtml.push("	<div class=\"v_comment\">");
+		
+		if(profilePhoto)
+		thtml.push("		<span><img src='"+profilePhoto+"' width=\"32\" height=\"32\"/></span>");
+		else
+		thtml.push("		<span class=\"t_photo\"></span>");
+		
+		thtml.push("		<span><textarea class=\"reset t_comment_area\" placeholder=\"Got something to say?\"></textarea></span><div class=\"clear\"></div>");
+		thtml.push("	</div>");
+		thtml.push("	<div class=\"load_comment\">");
+		
+		/*
+		thtml.push("	<div class=\"v_comment_post\">");
+		thtml.push("		<span><img src='"+profilePhoto+"' width=\"32\" height=\"32\"/></span>");
+		thtml.push("		<span><a href=''>Jinggo Villamor</a><p>This is so nice photo</p></span>");
+		thtml.push("		<div class=\"clear\"></div>");
+		thtml.push("	</div>");
+		*/
+		
+		thtml.push("	</div>");
+		thtml.push("	</div>");
+		thtml.push("	<div class=\"psidebar\">");
+		thtml.push("	<span class=\"icon ico-type\"></span>");
+		thtml.push("	<div class=\"description\">");
+
+		thtml.push("	</div>");
+			
+		thtml.push("	<div class=\"v_info\">");
+		thtml.push("		<a href=\"\">0 Comments in this post</a>");
+		thtml.push("		<span>0 Views viewed</span>");
+		thtml.push("	</div>");
+			
+		thtml.push("	<div class=\"v_social\">");
+		thtml.push("		<a href=\"\" class=\"ico-email\"></a>");
+		thtml.push("		<a href=\"\" class=\"ico-download\"></a>");
+		thtml.push("		<a href=\"\" class=\"ico-twitter\"></a>");
+		thtml.push("		<a href=\"\" class=\"ico-fb\"></a>");
+		thtml.push("	</div>");
+			
+		thtml.push("	</div>");
+		thtml.push("</div>");
+		thtml.push("</div>");
+		
+		thtml.push("<div class=\"clear\"></div>");
+		
+		$('.modal_timeline_body').empty().prepend(thtml.join(""));
+		
+		$(".nano").nanoScroller({ scroll: 'bottom' });
+
+	}
 };

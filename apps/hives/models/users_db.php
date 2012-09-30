@@ -24,7 +24,6 @@ class Users_db extends CI_Model
 	
 	function getUser($cond)
 	{
-		//$select = array('id','nickname');
 		$query = $this->mongo_db->where($cond)->get('users');
 		
 		return $query;

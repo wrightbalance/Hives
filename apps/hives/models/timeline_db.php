@@ -32,9 +32,10 @@ class Timeline_db extends CI_Model
 		
 		foreach($results as $key=>$row)
 		{
-			$userid 	= $this->mongo_db->mongoID($row['id']);
-			$user 		= $this->users_db->getUser(array('_id'=>$userid));
-			$posted_by 	= $user[0]['firstname'].' '.$user[0]['lastname'];
+			
+			$user 		= $this->users_db->getUser(array('_id'=>new MongoID($row['id'])));
+			$name		= $user[0]['name'];
+			$posted_by 	= $name['first'].' '.$name['last'];
 			
 			$caption = isset($row['caption']) ? $row['caption'] : '';
 		
@@ -47,6 +48,16 @@ class Timeline_db extends CI_Model
 			
 			$det_content = $this->_belowTbar($det_arr);
 			
+			$size = 32;
+			
+			if($tid)
+				$size = 50;
+			
+			if(!$photo = getphoto($row['id'],$size))
+			{
+				$photo = '';
+			}
+			
 			$timeline[] = array(
 				'type' 			=> $row['type'],
 				'content' 		=> $this->_content($row['type'],$row['content']),
@@ -57,11 +68,11 @@ class Timeline_db extends CI_Model
 				'label'			=> $row['label'],
 				'det_content'	=> $det_content,
 				'_id'			=> $user[0]['_id'],
-				'photo'			=> $user[0]['photo'] != "" ? $user[0]['photo'] : '' ,
+				'photo'			=> $photo,
 				'tid'			=> $row['_id'],
 				'user'			=> $user_details,
 				'posted_by'		=> ucwords($posted_by),
-				'share_photo' 	=> $row['type'] == "share_photo" ?  resource_url('images/share/org/'.$row['content']) : '',
+				'share_photo' 	=> $row['type'] == "share_photo" ?  $row['content'] : '',
 				'userid' 		=> (string)$user[0]['_id'],
 				'caption'		=> $caption,
 			);
@@ -97,7 +108,7 @@ class Timeline_db extends CI_Model
 				$content = "<p>".character_limiter($cont,80,'...')."<p>";
 				break;
 			case 'share_photo':
-				$content = "<img src='".resource_url('images/share/thumb/'.$cont)."' width=\"272\" height=\"135\"/>";
+				$content = "<img src='".$cont."' width=\"272\" height=\"135\"/>";
 				break;
 										
 		}

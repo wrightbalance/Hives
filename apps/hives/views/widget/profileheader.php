@@ -1,15 +1,13 @@
 
 <div class="profileName">
 	<div class="photo50">
-		<?php if(isset($user['photo'])){?>
-			<?php if(file_exists('./upld/photo/'.$user['_id'].'/'.$user['photo'].'_50.jpg')){?>
-				<img src="<?=resource_url('images/photo/'.$user['_id'].'/'.$user['photo'].'_50.jpg')?>" width="50" height="50"/>
-			<? } else { ?>
-				<div class="default50"></div>
-			<? } ?>
+	
+		<?php if(getphoto($user['_id']) !== false){?>
+			<img src="<?=getphoto($user['_id'])?>" alt="" width="50" height="50"/>
 		<? } else {?>
 			<div class="default50"></div>
 		<? } ?>
+		
 	</div>
 	<div class="pname">
 		<span class="name"><?=ucwords($user['name']['first'].' '.$user['name']['last'])?></span>

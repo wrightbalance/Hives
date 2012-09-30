@@ -41,6 +41,15 @@ if ( ! function_exists('url_friendly'))
 		}
 }
 
+if ( ! function_exists('clean_filename'))
+{
+	function clean_filename($url)
+		{
+			$url = strtolower(trim(preg_replace('/[^a-zA-Z0-9]+/', '', $url), ''));
+			return $url;
+		}
+}
+
 
 
 if ( ! function_exists('resizeimage')) 
@@ -335,22 +344,40 @@ function cropResizeImage($file_type, $max_width, $max_height, $blob, $quality) {
 		}
 	}
 	
-	function getphoto($filename,$size=50)
+	function getphoto($id,$size=50)
 	{
-		$CI =& get_instance();
+		$CI 	=& get_instance();
+		$CI->load->library('mongo_db');
+		$CI->load->model('users_db');
 		
-		$location = "./photos/%d/";
-		
-		$photo 	= "";
-        $url 	= base_url();
+		$photo 	= false;
+		$url 	= base_url();
 		$folder = 'resource_photo';
-
-		if(file_exists(sprintf($location,$size).$filename))
-		{
-			$photo = $url.config_item($folder).$size.'/'.$filename;
-		}
 		
+		$user = $CI->users_db->getUser(array('_id'=>$id));
+
+		if(isset($user[0]['photo']))
+		{
+			$filename = $user[0]['photo']['file'];
+			$location = "./photos/$filename/%d/";
+			$newfilename = $user[0]['photo']['file'].'.'.$user[0]['photo']['ext'];
+
+			if(file_exists(sprintf($location,$size).$newfilename))
+			{
+				$photo = $url.config_item($folder).$filename.'/'.$size.'/'.$newfilename.'?'.$user[0]['photo']['updated'];
+			}
+			
+
+		}
 		return $photo;
+	}
+	
+	function getshare($dir,$filename)
+	{
+		$folder = 'resource_photo';
+		$url = base_url();
+		
+		return $url.config_item($folder).$dir.'/share/'.$filename;
 	}
 	
 	function checkUrl($url)

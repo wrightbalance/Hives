@@ -4,7 +4,10 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{
-		var_dump( checkUrl('http://www.yahoo.com') );
+
+		$user = unserialize($this->session->userdata('user'));
+
+		echo getphoto($user[0]['_id'],$size=50);
 		exit();
 	}
 }

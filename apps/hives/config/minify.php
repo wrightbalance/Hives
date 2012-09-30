@@ -13,6 +13,7 @@ $config['css']['default'] = array(
     ,array('path'=>'css/','file'=>'style.css')
     ,array('path'=>'css/','file'=>'responsive.css')
     ,array('path'=>'css/','file'=>'crop.lib.css')
+    ,array('path'=>'css/','file'=>'nanoscroller.css')
     );
     
 $config['css']['main'] = array(
@@ -25,8 +26,9 @@ $config['css']['demo'] = array(
     
 $config['js']['default'] = array(
      array('path'=>'js/','file'=>'html.js')
+    ,array('path'=>'js/uploader/','file'=>'uploadifive.js')
     ,array('path'=>'js/','file'=>'bootstrap.min.js')
-    ,array('path'=>'js/','file'=>'jquery.lionbars.0.3.js')
+    ,array('path'=>'js/','file'=>'jquery.nanoscroller.min.js')
     ,array('path'=>'js/','file'=>'mousewheel.js')
     ,array('path'=>'js/','file'=>'timeline.js')
     ,array('path'=>'js/','file'=>'chat.js')  

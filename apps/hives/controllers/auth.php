@@ -53,21 +53,8 @@ class Auth extends CI_Controller
 	
 	function signout()
 	{
-		if($this->input->is_ajax_request())
-		{
-			$this->load->model('users_db');
-			$id = $this->input->post('sid');
-			$this->users_db->save(array('online'=>0),$id);
-		} 
-		else
-		{ 
-			$this->load->model('users_db');
-			$user = $this->session->userdata('user');
-			$this->users_db->save(array('online'=>0),(string)$user[0]['_id']);
-			
-			$this->session->sess_destroy();
+					$this->session->sess_destroy();
 			
 			redirect('');
-		}
 	}
 }

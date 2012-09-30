@@ -2,14 +2,10 @@
 
 <div class="profileFooter">
 	<a href="">
-		<?php if(isset($user['photo'])){?>
-			<?php if(file_exists('./upld/photo/'.$user['_id'].'/'.$user['photo'].'_32.jpg')){?>
-				<img src="<?=resource_url('images/photo/'.$user['_id'].'/'.$user['photo'].'_32.jpg')?>" width="32" height="32"/>
-			<? } else { ?>
-				<span class="default32"></span>
-			<? } ?>
+			<?php if(getphoto($user['_id']) !== false){?>
+			<img src="<?=getphoto($user['_id'],32)?>" alt="" width="32" height="32"/>
 		<? } else {?>
-			<span class="default32"></span>
+			<div class="default50"></div>
 		<? } ?>
 		
 	</a>

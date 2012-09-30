@@ -1,8 +1,4 @@
-	
 	</div>
-
-	
-
 </div>
 <div class="footer">
 		
@@ -31,7 +27,7 @@
 		var chat_port 		=  <?=config_item('chat_port')?>; 
 		var id 				= '<?=$user['_id']?>';
 		var pname 			= '<?=ucwords($user['name']['first'].' '.$user['name']['last'])?>';
-		var profilePhoto	= '<?=getphoto($user['vanity'],32)?>';
+		var profilePhoto	= '<?=getphoto($user['_id'],32)?>';
 		
 		if(typeof io != "undefined")
 		{

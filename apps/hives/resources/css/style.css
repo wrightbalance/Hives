@@ -642,6 +642,13 @@ a
 .timeline-holder
 {
 	width: 10000px;
+	position: relative;
+}
+
+.tAbsolute
+{
+	position: absolute;
+	top: -1000px;
 }
 
 .timeline-box
@@ -665,6 +672,7 @@ a
 {
 	height: 40px;
 	margin-top: 6px;
+	display: none;
 }
 
 .date_navigate
@@ -710,6 +718,7 @@ a
 	background: #fff;
 	opacity: 0.5;
 	margin-top: 10px;
+	display: none;
 }
 
 .date_nav span
@@ -1492,12 +1501,64 @@ a
 	background-position: -298px -150px;
 }
 
-
-
 .v_info span
 {
 
 	color: #000;
+}
+
+.v_comment
+{
+	background: #fff;
+	border: 1px solid #bfbebc;
+	padding: 3px;
+	margin: 10px 0 20px 0;
+}
+
+.v_comment_post
+{
+	margin-bottom: 10px;
+}
+
+.v_comment_post a
+{
+	line-height: 15px;
+}
+
+
+.v_comment_post p
+{
+	color: #313131;
+	font-size: 12px;
+}
+
+.v_comment_post a
+{
+	font-size: 13px;
+	display: block;
+	color: #07549a;
+}
+
+#uploadifive-share_photo
+{
+	float: left;
+}
+
+.v_comment span,
+.v_comment_post span
+{
+	float: left;
+	margin-right: 10px;
+}
+
+.v_comment textarea
+{
+	border: none;
+	resize: none;
+	margin: 0;
+	padding: 2px;
+	height: 28px;
+	width: 540px;
 }
 
 .psidebar .ico-sharephoto
@@ -1878,7 +1939,6 @@ input.hbtn
 	height: 50px;
 	background: #e9e8e8;
 	padding: 5px;
-	width: 450px;
 }
 
 .text2 textarea
@@ -1962,6 +2022,25 @@ input.hbtn
 	width: 263px;
 	margin-left: 18px;
 	padding-top: 32px;
+}
+
+#share_queue .uploadifive-queue-item
+{
+	width: 300px;
+	float: left;
+	margin: 4px 10px;
+}
+
+#share_queue .uploadifive-queue-item a,
+#share_queue .uploadifive-queue-item span.filename
+{
+	display: none;
+}
+
+#share_queue .progress,
+#share_queue .progress .progress-bar
+{
+	height: 20px;
 }
 
 .searchContact input

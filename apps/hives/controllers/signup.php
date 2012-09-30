@@ -43,14 +43,19 @@ class Signup extends CI_Controller
 			$db['online']		= 1;
 			$db['online_status'] = 'online';
 			$db['custom_status'] = '';
-			$db['vanity']		= url_friendly(strtolower($first.'-'.$last.'-'.uniqid()));
+			
+			$vanity = explode('@',$db['email']);
+			$db['vanity']		= clean_filename($vanity[0]);
+			
+			$checkvanity = $this->users_db->getUser(array('vanity'=>$db['vanity']));
+			
+			if($checkvanity)
+				$db['vanity'] = clean_filename($vanity[0].uniqid());
 			
 			$objid = $this->users_db->save($db);
 			
 			$db['id'] = $objid;
-			
 			$user = array($db);
-			
 			$this->session->set_userdata('user',serialize($user));
 			
 			$data['action'] = "reload";
