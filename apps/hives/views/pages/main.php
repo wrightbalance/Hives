@@ -5,7 +5,9 @@
 
 <?php if(!isset($jsgroup)) $jsgroup = "default"?>
 
-<script type="text/javascript" src="<?=site_url("mini/js/{$jsgroup}/".mtime('js',$jsgroup).'.js')?>"></script>
+<script type="text/javascript" data-main="<?=site_url("mini/js/{$jsgroup}/".mtime('js',$jsgroup))?>" src="<?=site_url("mini/js/requirejs/".mtime('js','requirejs').'.js')?>"></script>
+
+
 
 </body>
 </html>

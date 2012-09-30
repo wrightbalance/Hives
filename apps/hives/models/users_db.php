@@ -44,7 +44,7 @@ class Users_db extends CI_Model
 	
 	function buddyList()
 	{
-		$user = $this->session->userdata('user');
+		$user = unserialize($this->session->userdata('user'));
 		$query = $this->mongo_db->where_ne('_id',$user[0]['_id'])->get('users');
 		
 		return $query;

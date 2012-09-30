@@ -11,10 +11,28 @@ var jsonProc =
 			$('input[name='+i+']').removeClass('error');
 			$('input[name='+i+']').addClass('error');
 			
+			$('select[name='+i+']')
+							.focus('error')
+							.removeClass('error')
+							.addClass('error');
+			
+			$('input[name='+i+']').siblings().append("<i class=\"error_msg_"+i+"\">"+n+"</i>");
+			$('select[name='+i+']').siblings().append("<i class=\"error_msg_"+i+"\">"+n+"</i>");
+			
+			$('.error_msg_'+i).animate({
+				right: 0
+			},'fast',function(){
+				
+				var er = this;
+				
+				setTimeout(function(){
+					$(er).animate({
+						right: '-200px'
+					})
+				},2000)
+			})
 			return false;
 		})
-		//$('.response',form).html(data.message);
-		console.log(data.message);
 	}
 	,success: function(err,form)
 	{

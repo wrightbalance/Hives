@@ -24,17 +24,18 @@ class Signup extends CI_Controller
 		{
 			$data['error'] = $this->form_validation->_error_array;
 			$data['action'] = "retry";
+			$this->form_validation->set_error_delimiters('<p class="cerror">','</p>');
 			$data['message'] = validation_errors();
 		}
 		else
 		{
-			$data['action'] = "reload";
-			$data['url'] = site_url();
+			
+			$first 				= trim(ucwords($this->input->post('firstname')));
+			$last				= trim(ucwords($this->input->post('lastname')));
 			
 			$db['email'] 		= trim($this->input->post('email'));
 			$db['password'] 	= trim(md5($this->input->post('password')));
-			$db['firstname'] 	= trim(ucwords($this->input->post('firstname')));
-			$db['lastname'] 	= trim(ucwords($this->input->post('lastname')));
+			$db['name'] 		= array('first'=>$first,'last'=>$last); 
 			$db['gender'] 		= trim($this->input->post('gender'));
 			$db['created'] 		= date('Y-m-d H:i:s');
 			$db['updated'] 		= date('Y-m-d H:i:s');
@@ -42,7 +43,7 @@ class Signup extends CI_Controller
 			$db['online']		= 1;
 			$db['online_status'] = 'online';
 			$db['custom_status'] = '';
-			$db['photo']		 = '';
+			$db['vanity']		= url_friendly(strtolower($first.'-'.$last.'-'.uniqid()));
 			
 			$objid = $this->users_db->save($db);
 			
@@ -50,8 +51,10 @@ class Signup extends CI_Controller
 			
 			$user = array($db);
 			
-			$this->session->set_userdata('user',$user);
-	
+			$this->session->set_userdata('user',serialize($user));
+			
+			$data['action'] = "reload";
+			$data['url'] = site_url();
 		}
 		
 		$data['json'] = $data;

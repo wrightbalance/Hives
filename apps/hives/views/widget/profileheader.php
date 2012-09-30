@@ -12,7 +12,7 @@
 		<? } ?>
 	</div>
 	<div class="pname">
-		<span class="name"><?=ucwords($user['firstname'].' '.$user['lastname'])?></span>
+		<span class="name"><?=ucwords($user['name']['first'].' '.$user['name']['last'])?></span>
 		<?php if(isset($user['position'])){?><? } ?>
 		<span class="position">
 				<?php if(isset($user['position'])){?>

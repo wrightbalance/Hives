@@ -341,6 +341,22 @@ h1,h2,h3,h4
 	margin: 10px 0;
 }
 
+.frow label
+{
+	position: relative;
+	overflow: hidden;
+}
+
+.frow label i
+{
+	position: absolute;
+	right: -200px;
+	top: 0;
+	font-size: 9px;
+	font-style: normal;
+	color: red;
+}
+
 .frow *
 {
 	display: block;

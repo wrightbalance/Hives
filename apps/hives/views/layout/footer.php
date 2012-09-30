@@ -16,7 +16,13 @@
 <div class="clear"></div>
 </div>
 
-<script src="<?=substr(site_url(),0,-1).':'.config_item('chat_port')?>/socket.io/socket.io.js"></script>
+<?php 
+	$node_url = substr(site_url(),0,-1).':'.config_item('chat_port').'/socket.io/socket.io.js';
+?>
+
+<?php if(checkUrl($node_url)){?>
+<script src="<?=$node_url?>"></script>
+<? } ?>
 
 <script type="text/javascript">
 	var root = '<?=base_url()?>';
@@ -24,25 +30,8 @@
 		var socket_host 	= '<?=substr(site_url(),0,-1)?>';
 		var chat_port 		=  <?=config_item('chat_port')?>; 
 		var id 				= '<?=$user['_id']?>';
-		var pname 			= '<?=ucwords($user['firstname'].' '.$user['lastname'])?>';
-
-		<?php 
-			$photo = "";
-			if(isset($user['photo'])) 
-			{
-			
-				if(isset($user['photo']))
-				{
-					if(file_exists('./upld/photo/'.$user['_id'].'/'.$user['photo'].'_32.jpg'))
-					{
-						$photo = resource_url('images/photo/'.$user['_id'].'/'.$user['photo']);
-					}
-				}
-		
-			} 
-		?>
-		
-		var profilePhoto	= '<?=$photo?>';
+		var pname 			= '<?=ucwords($user['name']['first'].' '.$user['name']['last'])?>';
+		var profilePhoto	= '<?=getphoto($user['vanity'],32)?>';
 		
 		if(typeof io != "undefined")
 		{

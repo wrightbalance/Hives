@@ -5,7 +5,8 @@ class Uploader extends CI_Controller
 	
 	function index()
 	{
-		$user		 		= $this->session->userdata('user');
+		$user_sess		 	= $this->session->userdata('user');
+		$user				= unserialize($user_sess);	
 		$targetFolder 		= "../upload";
 		$data['response'] 	= "false";
 
@@ -18,6 +19,7 @@ class Uploader extends CI_Controller
 			
 			$fileName 	= $_FILES['Filedata']['name'];
 			$fileParts 	= pathinfo($fileName);
+			$ext		= $fileParts['extension'];
 			
 			if (in_array($fileParts['extension'],$fileTypes)) 
 			{
@@ -29,9 +31,12 @@ class Uploader extends CI_Controller
 					$jpeg_quality = 90;
 
 					$src = $targetFolder.'/'.$fileName;
-					$src_dist = '/photos/50/';
+					$src_dist = './photos/%d/'.$user[0]['vanity'].'.'.$ext;
 					
-					resizeimage($src, $src_dist,50,50,true);
+					resizeimage($src, sprintf($src_dist,50),50,50,true);
+					resizeimage($src, sprintf($src_dist,32),32,32,true);
+					
+					unlink($src);
 					
 				}
 			} 
@@ -39,6 +44,5 @@ class Uploader extends CI_Controller
 
 		$data['json'] = $data;
 		$this->load->view('ajax/json',$data);
-		exit();
 	}
 }

@@ -1,6 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');  
 
 $config['resource_folder'] = 'resources/hives/';
+$config['resource_photo'] = 'photos/';
 
 $config['expires'] = 60*60*24*14;
 $config['html_expires'] = 0;

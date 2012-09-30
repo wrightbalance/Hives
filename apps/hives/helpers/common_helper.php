@@ -334,3 +334,39 @@ function cropResizeImage($file_type, $max_width, $max_height, $blob, $quality) {
 			exit;
 		}
 	}
+	
+	function getphoto($filename,$size=50)
+	{
+		$CI =& get_instance();
+		
+		$location = "./photos/%d/";
+		
+		$photo 	= "";
+        $url 	= base_url();
+		$folder = 'resource_photo';
+
+		if(file_exists(sprintf($location,$size).$filename))
+		{
+			$photo = $url.config_item($folder).$size.'/'.$filename;
+		}
+		
+		return $photo;
+	}
+	
+	function checkUrl($url)
+	{
+		$handle = curl_init($url);
+		curl_setopt($handle,  CURLOPT_RETURNTRANSFER, TRUE);
+		$response = curl_exec($handle);
+		$httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+		curl_close($handle);
+		
+		$response = true;
+		
+		if($httpCode == 0)
+		{
+			$response = false;
+		}
+		
+		return $response;
+	}

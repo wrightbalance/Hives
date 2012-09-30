@@ -14,7 +14,7 @@
 		
 	</a>
 	<span class="pnameFooter">
-		<?=ucwords($user['firstname'].' '.$user['lastname'])?><br/>
+		<?=ucwords($user['name']['first'].' '.$user['name']['last'])?><br/>
 		<a href="">View My Page</a> <span>|</span><a href="">Edit</a>
 	</span>
 	

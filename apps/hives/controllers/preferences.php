@@ -13,7 +13,8 @@ class Preferences extends CI_Controller
 		$this->load->model('chat_db');
 		$this->load->model('timeline_db');
 		
-		$this->user = $this->session->userdata('user');
+			$user_session = $this->session->userdata('user');
+		$this->user = unserialize($user_session);
 		
 		$this->load->driver('cache',array('adapter'=>'memcached','backup'=>'file'));
 		
@@ -23,21 +24,17 @@ class Preferences extends CI_Controller
 	{
 		$this->benchmark->mark('code_start');
 		
-		$user = $this->users_db->getUser(array('_id'=>$this->user[0]['_id']));
-		$this->users_db->save(array('online'=>1),(string)$this->user[0]['_id']);
-	
-		$data['user'] 		= $user[0];
-		$data['buddys'] 	= $this->users_db->buddyList();
-		$data['timelines'] 	= $this->timeline_db->getTimeline();
-		
-		$data['jsgroup'] 	= "preferences";
-		
+		$data['buddys'] = $this->users_db->buddyList();
+
 		if( !$data['sidebar'] = $this->cache->get('sidebar') )
-			{
-				$data['sidebar'] = $this->load->view('widget/sidebar',$data,true);
-				$this->cache->save('sidebar',$data['sidebar'],7200);
-			}
-			
+		{
+			$data['sidebar'] = $this->load->view('widget/sidebar',$data,true);
+			$this->cache->save('sidebar',$data['sidebar'],7200);
+		}
+		
+		$data['user'] = $this->user[0];
+		$data['jsgroup'] = "preferences";
+		
 		$data['content'] = $this->load->view("pages/preferences",$data,true);
 		$data['elapse'] = $this->benchmark->elapsed_time('code_start', 'code_end');
 		
