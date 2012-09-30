@@ -126,7 +126,7 @@ class Timeline_db extends CI_Model
 				$content = "<p>".character_limiter($cont,80,'...')."<p>";
 				break;
 			case 'share_photo':
-				$content = "<img src='".$cont."' width=\"272\" height=\"135\"/>";
+				$content = "<img src='".$cont."' alt=\"\"/>";
 				break;
 										
 		}
