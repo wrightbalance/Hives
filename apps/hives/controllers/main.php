@@ -53,7 +53,7 @@ class Main extends CI_Controller
 		}
 			
 		
-       // $this->minify->html();
+       $this->minify->html();
 
         
 
