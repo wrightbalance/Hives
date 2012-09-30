@@ -3,7 +3,7 @@
 	<div class="photo50">
 	
 		<?php if(getphoto($user['_id']) !== false){?>
-			<img src="<?=getphoto($user['_id'])?>" alt="" width="50" height="50"/>
+			<img src="<?=getphoto($user['_id'])?>" alt=""/>
 		<? } else {?>
 			<div class="default50"></div>
 		<? } ?>

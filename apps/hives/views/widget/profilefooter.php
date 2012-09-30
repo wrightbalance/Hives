@@ -3,7 +3,7 @@
 <div class="profileFooter">
 	<a href="">
 			<?php if(getphoto($user['_id']) !== false){?>
-			<img src="<?=getphoto($user['_id'],32)?>" alt="" width="32" height="32"/>
+			<img src="<?=getphoto($user['_id'],32)?>" alt=""/>
 		<? } else {?>
 			<div class="default50"></div>
 		<? } ?>
