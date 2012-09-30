@@ -36,8 +36,8 @@ class Timeline_db extends CI_Model
 			$user 		= $this->users_db->getUser(array('_id'=>new MongoID($row['id'])));
 			$name		= $user[0]['name'];
 			$posted_by 	= $name['first'].' '.$name['last'];
-			
 			$caption = isset($row['caption']) ? $row['caption'] : '';
+			$comments = array();
 		
 			$det_arr = array(
 						'type'		=>	$row['type'],
@@ -58,12 +58,30 @@ class Timeline_db extends CI_Model
 				$photo = '';
 			}
 			
+			if($row['comments'])
+			{
+				foreach($row['comments'] as $comment)
+				{
+					$comment_id  = new MongoID($comment['comment_id']);
+					
+					$comments[] = array(
+						'id'	=> $comment['id'],
+						'tid'	=> $row['id'],
+						'comment' => $comment['comment'],
+						'comment_by'=>$comment['comment_by'],
+						'created' => $comment['created'],
+						'photo' => getphoto($comment_id,32)
+					);
+				}
+			}
+			
 			$timeline[] = array(
 				'type' 			=> $row['type'],
 				'content' 		=> $this->_content($row['type'],$row['content']),
 				'fullcontent'	=> "<p>".nl2br($row['content'])."</p>",
 				'description' 	=>  $caption,
-				'comments' 		=> $row['comments'],
+				'comments' 		=> $comments,
+				'comment_count' 		=> $row['comment_count'],
 				'icon'			=> $row['icon'],
 				'label'			=> $row['label'],
 				'det_content'	=> $det_content,
@@ -114,5 +132,21 @@ class Timeline_db extends CI_Model
 		}
 		
 		return $content;
+	}
+	
+	function comment_save($db,$id)
+	{
+		$id = new MongoID($id);
+		$this->mongo_db->where(array('_id'=>$id))->inc(array('comment_count'=>1))->update('timeline');
+		
+		$query = $this->mongo_db->where(array('_id'=>$id))->get('timeline');
+		$row = $query[0];
+		$db['id'] = $id.'_'.$row['comment_count'];
+		
+		$this->mongo_db->where(array('_id'=>$id))->push('comments',$db)->update('timeline');
+
+		
+		return $db['id'] ;
+		
 	}
 }

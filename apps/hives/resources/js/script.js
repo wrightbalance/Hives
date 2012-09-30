@@ -34,11 +34,6 @@ $(document).ready(function(){
 		document.title = originalTitle;
 	});
 	
-	//$('.timeline-content').lionbars();
-	
-	
-	
-	$('.buzzingerContact').lionbars();
 	
 	var sbarStatus = true;
 	

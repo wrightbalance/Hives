@@ -34,7 +34,7 @@
 				tbox.push('						<div class="t_title t_'+n.type+'">');
 				tbox.push('							<span class="t_icon '+n.icon+'"></span>');
 				tbox.push('							<span class="t_label">'+n.label+'</span>');
-				tbox.push('							<span class="t_count">'+n.comments+' Comment</span>');
+				tbox.push('							<span class="t_count">'+n.comment_count+' Comment</span>');
 				tbox.push('						</div>');						
 				tbox.push('						<div class="clear"></div>');
 				tbox.push('						<div class="t_user_details">');
@@ -206,19 +206,48 @@ $(document).ready(function(){
 		{
 			e.preventDefault();
 			var comment = $(this).val();
-			
+			var tid = $(this).data('tid')
 			$(this).val('');
 			
 			var tbox = [];
 			
-			tbox.push("	<div class=\"v_comment_post\">");
+			tbox.push("	<div class=\"v_comment_post\"  style=\"display: none\">");
 			tbox.push("		<span><img src='"+profilePhoto+"' width=\"32\" height=\"32\"/></span>");
-			tbox.push("		<span><a href=''>"+pname+"</a><p>"+comment+"</p></span>");
+			tbox.push("		<span><a href='javascript:;'>"+pname+"</a><p>"+comment+"</p></span>");
+			tbox.push("		<span class=\"delete\"><a href='javascript:;' >×</a></span>");
 			tbox.push("		<div class=\"clear\"></div>");
 			tbox.push("	</div>");
 			
 			$('.load_comment').prepend(tbox.join(""));
 			$(".nano").nanoScroller({ scroll: 'bottom' });
+			
+			$('.v_comment_post').fadeIn('slow');
+			
+			$.ajax({
+				url: root + 'timeline/comment',
+				dataType: 'json',
+				type: 'post',
+				data: {
+						 tid: tid
+						,comment: comment
+						,comment_by: pname
+						,comment_id: id
+					},
+				success: function(data)
+				{
+					try
+					{
+						var fchild = $('.load_comment div.v_comment_post:first-child');
+						
+						fchild.addClass('comment_post_'+data.comment_id);
+						$('.delete a',fchild).attr('data-tid',data.tid);
+						$('.delete a',fchild).attr('data-comment_id',data.comment_id);
+					}
+					catch(e)
+					{}
+				}
+			})
+			
 
 		}
 		
@@ -367,6 +396,8 @@ $(document).ready(function(){
 						{
 							var db = data.db;
 							var type = db[0].type;
+							var comments = db[0].comments;
+							var tbox = [];
 							
 							$('.posted_by').html(db[0].posted_by);
 							
@@ -395,7 +426,6 @@ $(document).ready(function(){
 									$('.t_caption').html('').html(db[0].caption);
 									$('.description').html('').html('<p>'+db[0].description+'</p>');
 									break;
-								
 							}
 							
 							
@@ -407,7 +437,20 @@ $(document).ready(function(){
 								}
 							);
 							
-							//console.log(db);
+							$.each(comments,function(i,n){
+
+								tbox.push("	<div class=\"v_comment_post comment_post_"+n.id+"\">");
+								tbox.push("		<span><img src='"+n.photo+"' width=\"32\" height=\"32\"/></span>");
+								tbox.push("		<span><a href='javascript:;'>"+n.comment_by+"</a><p>"+n.comment+"</p></span>");
+								tbox.push("		<span class=\"delete\"><a href='javascript:;' data-tid='"+n.tid.$id+"' data-comment_id='"+n.id+"'>×</a></span>");
+								tbox.push("		<div class=\"clear\"></div>");
+								tbox.push("	</div>");
+								
+								
+							})
+							
+							$('.load_comment').html('').prepend(tbox.join(""));
+							
 							
 						}
 					}
@@ -419,6 +462,26 @@ $(document).ready(function(){
 		
 	})
 	
+	$('.modal_timeline_body').delegate('.delete a','click',function(e){
+		e.preventDefault();
+		var tid = $(this).data('tid');
+		var comment_id = $(this).data('comment_id');
+		
+		$('.comment_post_'+comment_id).fadeOut('slow');
+		
+		$.ajax({
+			url: root + 'timeline/delete_comment',
+			dataType: 'JSON',
+			type: 'POST',
+			data: {
+					tid: tid,
+					comment_id: comment_id
+				},
+			success: function(data)
+			{
+			}
+		})
+	})
 
 	
 	var timelineLeft = $('#timeline').scrollLeft();

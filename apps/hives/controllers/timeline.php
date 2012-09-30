@@ -86,7 +86,8 @@ class Timeline extends CI_Controller
 		
 		$tdb['type'] 		= $type;
 		$tdb['id']			= $user[0]['_id'];
-		$tdb['comments'] 	= 0;
+		$tdb['comment_count'] 	= 0;
+		$tdb['comments'] 	= array();
 		$tdb['icon']		= 'ico-message';
 		$tdb['label']		= 'Status Post';
 		$tdb['content']		= $status;
@@ -131,7 +132,8 @@ class Timeline extends CI_Controller
 		
 		$tdb['type'] 		= 'share_photo';
 		$tdb['id']			= $user[0]['_id'];
-		$tdb['comments'] 	= 0;
+		$tdb['comment_count'] 	= 0;
+		$tdb['comments'] 	= array();
 		$tdb['icon']		= 'ico-photo';
 		$tdb['label']		= '1 Photo';
 		$tdb['content']		= $content;
@@ -239,5 +241,36 @@ class Timeline extends CI_Controller
 		$data['user'] = $this->user[0];
 		$data['jsgroup'] = "timeline";
 		$this->load->view('pane/timeline',$data);
+	}
+	
+	function comment()
+	{
+		if(!$this->input->is_ajax_request()) exit();
+		
+		$tid = trim($this->input->post('tid'));
+		$db['comment'] = trim($this->input->post('comment'));
+		$db['comment_by'] = $this->input->post('comment_by');
+		$db['comment_id'] = $this->input->post('comment_id');
+		$db['created']	= date('Y-m-d H:i:s');
+		
+		$comment_id = $this->timeline_db->comment_save($db,$tid);
+		
+		$data['tid'] = $tid;
+		$data['comment_id'] = $comment_id;
+		
+		$data['json'] = $data;
+		$this->load->view('ajax/json',$data);
+		
+	}
+	
+	function delete_comment()
+	{
+		$tid = $this->input->post('tid');
+		$cid = $this->input->post('comment_id');
+		
+		$this->mongo_db->pull('comments',array('id'=>(string)$cid))->update('timeline');
+		
+		
+		
 	}
 }

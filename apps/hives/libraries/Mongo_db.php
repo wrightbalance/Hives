@@ -757,7 +757,7 @@ class Mongo_db {
 				
 		try
 		{
-			$options = array_merge($options, array($this->query_safety => TRUE, 'multiple' => FALSE));
+			$options = array_merge($options, array($this->query_safety => TRUE, 'multiple' => TRUE));
 			$this->db->{$collection}->update($this->wheres, $this->updates, $options);
 			$this->_clear();
 			return (TRUE);

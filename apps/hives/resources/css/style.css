@@ -1517,7 +1517,31 @@ a
 
 .v_comment_post
 {
-	margin-bottom: 10px;
+	padding:10px 0;
+	border-bottom: 1px solid #ddd;
+	border-top: 1px solid #FDFDFD;
+}
+
+.v_comment_post:first-child
+{
+	border-top: 0;
+}
+
+.v_comment_post span.delete a
+{
+	font-size: 13px;
+	font-weight: bolder;
+	color: #222
+}
+
+.v_comment_post span.delete
+{
+	float: right;
+	display: none;
+}
+.v_comment_post:hover span.delete
+{
+	display: block;
 }
 
 .v_comment_post a

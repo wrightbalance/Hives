@@ -111,23 +111,25 @@
 		thtml.push("	</div>");
 		thtml.push("	</div>");
 		thtml.push("	<div class=\"psidebar\">");
-		thtml.push("	<span class=\"icon ico-type\"></span>");
-		thtml.push("	<div class=\"description\">");
+		thtml.push("	  <div class=\"pwrapper\">");
+		thtml.push("		<span class=\"icon ico-type\"></span>");
+		thtml.push("		<div class=\"description\">");
 
-		thtml.push("	</div>");
+		thtml.push("		</div>");
 			
-		thtml.push("	<div class=\"v_info\">");
-		thtml.push("		<a href=\"\">0 Comments in this post</a>");
-		thtml.push("		<span>0 Views viewed</span>");
-		thtml.push("	</div>");
+		thtml.push("		<div class=\"v_info\">");
+		thtml.push("			<a href=\"\">0 Comments in this post</a>");
+		thtml.push("			<span>0 Views viewed</span>");
+		thtml.push("		</div>");
 			
-		thtml.push("	<div class=\"v_social\">");
-		thtml.push("		<a href=\"\" class=\"ico-email\"></a>");
-		thtml.push("		<a href=\"\" class=\"ico-download\"></a>");
-		thtml.push("		<a href=\"\" class=\"ico-twitter\"></a>");
-		thtml.push("		<a href=\"\" class=\"ico-fb\"></a>");
-		thtml.push("	</div>");
+		thtml.push("		<div class=\"v_social\">");
+		thtml.push("			<a href=\"\" class=\"ico-email\"></a>");
+		thtml.push("			<a href=\"\" class=\"ico-download\"></a>");
+		thtml.push("			<a href=\"\" class=\"ico-twitter\"></a>");
+		thtml.push("			<a href=\"\" class=\"ico-fb\"></a>");
+		thtml.push("		</div>");
 			
+		thtml.push("	  </div>");
 		thtml.push("	</div>");
 		thtml.push("</div>");
 		thtml.push("</div>");

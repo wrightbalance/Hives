@@ -36,7 +36,7 @@ class Auth extends CI_Controller
 			
 			if($user)
 			{
-				$this->session->set_userdata('user',$user);
+				$this->session->set_userdata('user',serialize($user));
 			}
 			else
 			{
