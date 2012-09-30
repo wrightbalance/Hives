@@ -25,7 +25,8 @@ $config['css']['demo'] = array(
     );
     
 $config['js']['default'] = array(
-     array('path'=>'js/','file'=>'html.js')
+     array('path'=>'js/','file'=>'jquery-1.8.2.min.js')
+    ,array('path'=>'js/','file'=>'html.js')
     ,array('path'=>'js/uploader/','file'=>'uploadifive.js')
     ,array('path'=>'js/','file'=>'bootstrap.min.js')
     ,array('path'=>'js/','file'=>'jquery.nanoscroller.min.js')
@@ -37,7 +38,8 @@ $config['js']['default'] = array(
     );
     
 $config['js']['preferences'] = array(
-     array('path'=>'js/uploader/','file'=>'uploadifive.js')
+	 array('path'=>'js/','file'=>'jquery-1.8.2.min.js')
+    ,array('path'=>'js/uploader/','file'=>'uploadifive.js')
     ,array('path'=>'js/uploader/','file'=>'uploader.js')
     ,array('path'=>'js/crop/','file'=>'crop.lib.js')
     );
@@ -48,7 +50,8 @@ $config['js']['requirejs'] = array(
 
     
 $config['js']['main'] = array(
-    array('path'=>'js/','file'=>'main.js')
+    array('path'=>'js/','file'=>'jquery-1.8.2.min.js')
+    ,array('path'=>'js/','file'=>'main.js')
     );
   
 $config['css3_browsers'] = array(
