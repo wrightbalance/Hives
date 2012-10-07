@@ -53,8 +53,11 @@
   opacity    : 0.99;
 }
 
-.nano { width: 934px; height: 582px; }
+.nano_content { width: 934px; height: 582px; }
 .nano .content { padding: 5px; }
 .nano .pane   { background: #F2F2F2; width: 5px}
 .nano .slider { background: #a9a9a9; }
 
+.nano_pcenter { width: 700px; height: 433px; }
+.nano_pcenter .content { padding: 0; }
+.nano_pcenter .pane { background: none; width: 8px; }

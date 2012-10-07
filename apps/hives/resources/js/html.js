@@ -84,7 +84,7 @@
 	{
 		var thtml = [];
 		
-		thtml.push("<div class=\"nano\">");
+		thtml.push("<div class=\"nano nano_content\">");
 		thtml.push("<div class=\"content\">");
 		thtml.push("	<div class=\"pviewer\">");
 		thtml.push("	<h3 class=\"t_caption\">&nbsp;</h3>");

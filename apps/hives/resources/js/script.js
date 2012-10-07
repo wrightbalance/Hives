@@ -34,6 +34,7 @@ $(document).ready(function(){
 		document.title = originalTitle;
 	});
 	
+	$(".nano").nanoScroller();
 	
 	var sbarStatus = true;
 	

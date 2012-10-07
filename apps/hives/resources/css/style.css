@@ -2090,3 +2090,148 @@ input.hbtn
 {
 	display: none;
 }
+
+.pOuter
+{
+	width: 1050px;
+	height: auto;
+	margin: 15px auto 0 auto;
+}
+
+.pLeft,
+.pRight,
+.pCenter
+{
+	float: left;
+	min-height: 300px;
+}
+
+.pLeft,
+.pRight
+{
+	width: 167px;
+
+}
+.pCenter
+{
+	width: 715px;
+}
+
+.pLeft h3
+{
+	font-size: 13px;
+	font-weight: normal;
+	margin-bottom: 15px;
+}
+
+.pBox h4
+{
+	font-size: 13px;
+	padding: 0 10px;
+	font-weight: normal;
+}
+
+
+.sub_url
+{
+	margin: 0 0 10px 25px;
+}
+
+.sub_url a
+{
+	display: block;
+	font-size: 11px;
+	color: #fff;
+}
+
+.url
+{
+	cursor: pointer;
+}
+
+.list
+{
+	height: 55px;
+	margin-bottom: 7px;
+	float:left;	
+}
+
+.list div
+{
+	float: left;
+}
+
+.list .lopt
+{
+	width: 21px;
+	text-align: center;
+	padding: 0 2px;
+}
+
+
+.lopt span.type
+{
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	margin: 0px 0 0 2px;
+	background-image: url(../images/spr.png);
+	background-repeat: no-repeat;
+	background-position: 1px -170px;
+}	
+
+.list .lphoto
+{
+	width: 50px;
+	height: 50px;
+	background: #fff;
+	margin: 2px 2px;
+}
+
+.listInner
+{
+	background: rgba(0,0,0,.3);
+	padding: 3px 0;
+}
+
+.list:hover .listInner,
+.list:hover .laction
+{
+	background: rgba(0,0,0,.2);
+	-webkit-transition: opacity 1s ease-in-out;
+}
+
+.lcontent span,
+.lcontent a
+{
+	display: block;
+	color: #fff;
+}
+
+.laction
+{
+	width: 50px;
+	height: 60px;
+	background: rgba(0,0,0,.3);
+	margin-left: 2px;
+}
+
+.lcontent
+{
+	margin-left: 5px;
+	width: 550px;
+}
+
+.lcontent a 
+{
+	font-size: 14px;
+}
+
+.garbage
+{
+	background: url(../images/spr.png) no-repeat -344px -95px;
+	display: block;
+	width: 16px;
+	height: 16px;
+	margin: 20px auto;
+}
